@@ -1,0 +1,8 @@
+<library path="lib/libline_segment_detector">
+  <class name="slapper_vision/LineSegmentDetector" type="slapper_vision::LineSegmentDetector" base_class_type="nodelet::Nodelet">
+  <description>
+  TODO: TRY to fix using nodelet tutorial and looking at GitHub line_segment_detector
+  nodelet adapted from jsk-pcl-ros line_segment_detector
+  </description>
+  </class>
+</library>

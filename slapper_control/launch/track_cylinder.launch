@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="slapper_control" type="track_cylinder" name="track_cylinder_node" output="screen"/>
+
+    <!-- Transformation between camera_link and body_FLU frame:-->
+    <!-- -0.1m (estimation) in z offset distance camera origin and drone origin  -->
+    <!-- 90deg roll rotation and then 90deg yaw rotation -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="camera_to_body" args="0 0 -0.1 0.5 -0.5 0.5 0.5 camera_link body_FLU" />
+
+    <!-- Dynamic transformation between body_FLU frame and local frame-->
+    <node pkg="slapper_control" type="body_frame_transform" name="body_to_local" output="screen"/>
+
+    <!-- Dynamic transformation between body_FLU frame and mocap frame-->
+    <node pkg="slapper_control" type="mocap_body_transform" name="body_to_mocap" output="screen">
+        <param name = "drone_name" value = "slapper"/>
+    </node>
+
+    <!-- Local position velocity controller node -->
+    <!-- <node pkg="slapper_control" type="local_position_controller" name="local_position_controller_node" output="screen"/> -->
+
+
+    <!-- <include file="$(find slapper_control)/launch/pid_local_position.launch"/> -->
+
+    <!-- Set ONE of these to True depending on desired outputs -->
+    <arg name="cluster_testing"           default="false"/>
+    <arg name="cylinder_testing"         default="false"/>
+    <arg name="centroid_testing"         default="false"/>
+    <arg name="coefficient_testing"         default="true"/>
+
+    <!-- Set point cloud topic that is subscribed to -->
+    <arg name="subscribe_topic"         default="/iris_depth_camera/camera/depth/points"/>
+
+    <!-- Set name of frame to which point clouds are published to -->
+    <arg name="publish_frame"         default="camera_link"/>
+
+    <node pkg="slapper_vision" type="cylinder_detector" name="cylinder_detector" output="screen">
+        <param name = "LAB_threshold" value = "15.0"/>
+        <param name = "vg_leaf " value = "0.01"/>
+        <param name = "pt_min" value = "0.0"/>
+        <param name = "pt_max" value = "4.0"/>
+        <param name = "cluster_tolerance" value = "0.01"/>
+        <param name = "cluster_size_perc_min" value = "0.01"/>
+        <param name = "cluster_size_perc_max" value = "0.1"/>
+        <param name = "normal_k" value = "50"/>
+        <param name = "cylinder_normal_distance" value = "0.1"/>
+        <param name = "cylinder_max_iterations" value = "10000"/>
+        <param name = "cylinder_inlier_distance" value = "0.02"/>
+        <param name = "cylinder_radius_min" value = "0.05"/>
+        <param name = "cylinder_radius_max" value = "0.07"/>
+        <param name = "cylinder_scoring_distance" value = "0.5"/>
+        <param name = "optimise_cylinder" value = "true"/>
+        <param name = "cylinder_min_roll" value = "0.0"/>
+        <param name = "cylinder_max_roll" value = "90.0"/>
+        <param name = "cylinder_min_pitch" value = "0.0"/>
+        <param name = "cylinder_max_pitch" value = "90.0"/>
+        <param name = "cylinder_min_yaw" value = "0.0"/>
+        <param name = "cylinder_max_yaw" value = "90.0"/>
+        
+        <param name = "cluster_testing" value = "$(arg cluster_testing)"/>
+        <param name = "cylinder_testing" value = "$(arg cylinder_testing)"/>
+        <param name = "centroid_testing" value = "$(arg centroid_testing)"/>
+        <param name = "coefficient_testing" value = "$(arg coefficient_testing)"/>
+
+        <param name = "subscribe_topic" value = "$(arg subscribe_topic)"/>
+
+        <param name = "publish_frame" value = "$(arg publish_frame)"/>
+    </node>
+
+
+</launch>

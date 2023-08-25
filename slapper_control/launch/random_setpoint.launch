@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="slapper_control" type="random_setpoint" name="random_setpoint_node" output="screen"/>
+
+    <node pkg="slapper_control" type="gazebo_mocap_odom" name="gazebo_mocap_odom_node" output="screen"/>
+
+    <node pkg="slapper_control" type="gazebo_odom_remap" name="gazebo_odom_remap_node" output="screen"/>
+
+    <!-- Local position velocity controller node -->
+    <node pkg="slapper_control" type="pid_controller" name="pid_controller" output="screen">
+        <param name="kp_x" value = "7.0"/>
+        <param name="kp_y" value = "7.0"/>
+        <param name="kp_z" value = "28.0"/>
+        <param name="kp_yaw" value = "35"/>
+
+        <param name="ki_x" value = "1"/>
+        <param name="ki_y" value = "1"/>
+        <param name="ki_z" value = "10"/>
+        <param name="ki_yaw" value = "0"/>
+
+        <param name="kd_x" value = "0"/>
+        <param name="kd_y" value = "0"/>
+        <param name="kd_z" value = "2"/>
+        <param name="kd_yaw" value = "0"/>
+        
+        
+        <param name = "reference_topic" value = "/local_position_setpoint"/>
+        <param name = "pose_topic" value = "/mavros/vision_pose/pose"/>
+
+    </node>
+
+</launch>

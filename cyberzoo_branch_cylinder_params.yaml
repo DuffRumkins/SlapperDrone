@@ -1,0 +1,57 @@
+!!python/object/new:dynamic_reconfigure.encoding.Config
+dictitems:
+  LAB_threshold: 22.0
+  cluster_size_perc_max: 0.2673
+  cluster_size_perc_min: 0.05
+  cluster_tolerance: 0.04
+  cylinder_inlier_distance: 0.02
+  cylinder_max_iterations: 1000
+  cylinder_max_pitch: 90.0
+  cylinder_max_roll: 90.0
+  cylinder_max_yaw: 20.0
+  cylinder_min_pitch: 0.0
+  cylinder_min_roll: 0.0
+  cylinder_min_yaw: 0.0
+  cylinder_normal_distance: 0.1
+  cylinder_radius_max: 0.045
+  cylinder_radius_min: 0.02
+  cylinder_scoring_distance: 0.5
+  groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+    dictitems:
+      LAB_threshold: 22.0
+      cluster_size_perc_max: 0.2673
+      cluster_size_perc_min: 0.05
+      cluster_tolerance: 0.04
+      cylinder_inlier_distance: 0.02
+      cylinder_max_iterations: 1000
+      cylinder_max_pitch: 90.0
+      cylinder_max_roll: 90.0
+      cylinder_max_yaw: 20.0
+      cylinder_min_pitch: 0.0
+      cylinder_min_roll: 0.0
+      cylinder_min_yaw: 0.0
+      cylinder_normal_distance: 0.1
+      cylinder_radius_max: 0.045
+      cylinder_radius_min: 0.02
+      cylinder_scoring_distance: 0.5
+      groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      id: 0
+      name: Default
+      normal_k: 50
+      optimise_cylinder: false
+      parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      parent: 0
+      pt_max: 2.0
+      pt_min: 0.0
+      state: true
+      type: ''
+      vg_leaf: 0.01
+    state: []
+  normal_k: 50
+  optimise_cylinder: false
+  pt_max: 2.0
+  pt_min: 0.0
+  vg_leaf: 0.01
+state: []
